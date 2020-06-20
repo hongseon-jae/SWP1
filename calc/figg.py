@@ -8,10 +8,13 @@ def application(environ, start_response):
 	sum = d.get('sum', [''])[0]
 	product = d.get('product', [''])[0]
 	sum,product = 0,0
-	if a.isdigit() and b.isdigit():
+	try:
 		a,b = int(a), int(b)
 		sum = [a+b]	
 		product = [a*b]
+	except ValueError:
+		sum = "error"
+		product = "error"
 	response_body = html % {
 		'sum' : sum,
 		'product' : product,
